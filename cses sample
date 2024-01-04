@@ -52,5 +52,146 @@ public class CoinCombinationsI {
 			din.close();
 		}
 	}
+
+/*import java.io.*;
+import java.util.*;
  
+public class CoinCombinationsI{
+ 
+    public static void main(String... args) throws Exception {
+        OutputStream outputStream = System.out;
+        PrintWriter out = new PrintWriter(outputStream);
+        FastReader in = new FastReader();
+        
+      
+          //Start
+         int n=in.nextInt();
+        int x=in.nextInt();
+        int[] c=new int[n];  
+        for (int i = 0; i < n; i++) {
+            c[i]=in.nextInt();
+        }
+        int[] dp=new int[x+1];
+        Arrays.fill(dp, 0);
+        dp[0]=1;
+        for (int i = 1; i <=x; i++) {
+            for (int j = 0; j < n; j++) {
+                if(c[j]<=i){
+                    dp[i]= (int) ((dp[i]+dp[i-c[j]])%mod);
+                }
+            }
+        }
+      
+        out.println(dp[x]);
+        
+        out.close();
+    }
+    static int[] segmentTree;
+    static void buildSegmentTree(int s, int e, int i, int[] arr){
+      if(s == e) {
+        segmentTree[i] = arr[s];
+        return;
+      }
+      int mid = s + (e - s) / 2;
+      buildSegmentTree(s, mid, 2 * i + 1, arr);
+      buildSegmentTree(mid + 1, e, 2 * i + 2, arr);
+        if((int)(Math.log((1 + e - s)) / Math.log(2)) % 2 == 1) segmentTree[i] = segmentTree[2 * i + 1] | segmentTree[2 * i + 2];
+        else segmentTree[i] = segmentTree[2 * i + 1] ^ segmentTree[2 * i + 2];
+    }
+    static int querySegmentTree(int s, int e, int i, int l, int h){
+      if(l <= s && h >= e) return segmentTree[i];
+      if(l > e || h < s) return 0;
+      int mid = s + (e - s) / 2;
+      int left = querySegmentTree(s, mid, 2 * i + 1, l, h);
+      int right = querySegmentTree(mid + 1, e, 2 * i + 2, l, h);
+      if((int)(Math.log((1 + e - s)) / Math.log(2)) % 2 == 1) return left | right;
+      else return left ^ right;
+    }
+    static void updateSegmentTree(int s, int e, int i, int v, int nv){
+      if(s == e){
+        segmentTree[i] = nv;
+        return;
+      } 
+      int mid = s + (e - s) / 2;
+      if(v <= mid) updateSegmentTree(s, mid, 2 * i + 1, v, nv);
+      else updateSegmentTree(mid + 1, e, 2 * i + 2, v, nv);
+      if((int)(Math.log((1 + e - s)) / Math.log(2)) % 2 == 1) segmentTree[i] = segmentTree[2 * i + 1] | segmentTree[2 * i + 2];
+      else segmentTree[i] = segmentTree[2 * i + 1] ^ segmentTree[2 * i + 2];
+    }
+    static final long mod = 1000000007;
+    static class FastReader
+    {
+        BufferedReader br;
+        StringTokenizer st;
+        public FastReader() {br = new BufferedReader(new InputStreamReader(System.in));} 
+        String next() 
+        { 
+            while (st == null || !st.hasMoreElements()) 
+            { 
+                try{st = new StringTokenizer(br.readLine());} 
+                catch (IOException  e){e.printStackTrace();} 
+            } 
+            return st.nextToken(); 
+        } 
+        int nextInt() {return Integer.parseInt(next());} 
+        long nextLong(){return Long.parseLong(next());} 
+        double nextDouble(){return Double.parseDouble(next());} 
+        String nextLine() 
+        { 
+            String str = ""; 
+            try{str = br.readLine();} 
+            catch (IOException e){e.printStackTrace();} 
+            return str; 
+        } 
+    }
+    static class Pair implements Comparable<Pair>{
+	    Pair(){
+	    }
+	    public int compareTo(Pair that){
+	        return 0;
+	    }
+	}
+	static int[] par;
+	static int[] rank;
+	static int find(int a){
+	    if(par[a] == a) return a;
+	    else return par[a] = find(par[a]);
+	}
+	static void merge(int a, int b){
+	    int para = find(a);
+	    int parb = find(b);
+	    if(para == parb) return;
+	    if(rank[para] < rank[parb]) par[para] = parb;
+	    else if(rank[parb] < par[a]) par[parb] = para;
+	    else{
+            par[parb] = para;
+            ++rank[para];
+	    }
+	}
+	static long gcd(long a, long b){return (b==0)?a:gcd(b,a%b);}
+    static int gcd(int a, int b){return (b==0)?a:gcd(b,a%b);}
+    static boolean biPartite(ArrayList<ArrayList<Integer>> adj,int V){
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=1;i<=V;i++) if(hm.get(i)==null) if(!(modDFS(i,adj,hm,0))) return false;
+        return true;
+    }
+    static boolean modDFS(int V,ArrayList<ArrayList<Integer>> adj,HashMap<Integer,Integer> hm,int c){
+        if(hm.get(V)!=null) if(hm.get(V)!=c) return false; else return true;
+        hm.put(V,c);
+            for(Integer k:adj.get(V)){
+                if(c==1)if(!modDFS(k,adj,hm,0)) return false;
+                else if(!modDFS(k,adj,hm,1)) return false;
+            }
+        return true;
+    }
+    static ArrayList<ArrayList<Integer>> getGraph(int n, int m, FastReader in){
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++) adj.add(new ArrayList<>());
+        for(int i = 0 ; i < m ; i++){
+            int u = in.nextInt() - 1; int v = in.nextInt() - 1;
+            adj.get(u).add(v); adj.get(v).add(u);
+        }
+        return adj;
+    }
+*/
 	public static void main(String[] args) throws IOException {
